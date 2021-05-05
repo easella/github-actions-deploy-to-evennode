@@ -1,11 +1,12 @@
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 3000
+var express = require('express')
+var Unblocker = require('unblocker');
+var app = express();
+var unblocker = new Unblocker({prefix: '/proxy/'});
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// this must be one of the first app.use() calls and must not be on a subdirectory to work properly
+app.use(unblocker);
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+
+
+// the upgrade handler allows unblocker to proxy websockets
+app.listen(process.env.PORT || 8080)
