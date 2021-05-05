@@ -14,12 +14,7 @@ jobs:
     - name: Install SSH key
       uses: shimataro/ssh-key-action@v2
       with:
-        key: ${{ b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-QyNTUxOQAAACDD9dvegaQR9tWE9wGaSZrEf8PC2sj+1AVKh0SatDMn/AAAAJijJXxaoyV8
-
-WgAAAAtzc2gtZWQyNTUxOQAAACDD9dvegaQR9tWE9wGaSZrEf8PC2sj+1AVKh0SatDMn/A
-AAAEDRYf0hlatx1YiJ1ItwT6KqdQeWw7fiSPgzgQAaenr6ysP1296BpBH21YT3AZpJmsR/
-w8LayP7UBUqHRJq0Myf8AAAAEWVhc2VsbGFAeWFob28uY29tAQIDBA==}}
+        key: ${{ secrets.SSH_KEY}}
         known_hosts: " "
     - name: Add git.evennode.com to known_hosts
       run: |
@@ -30,6 +25,6 @@ w8LayP7UBUqHRJq0Myf8AAAAEWVhc2VsbGFAeWFob28uY29tAQIDBA==}}
     - name: Deploy to evennode.com
       run: |
         git remote add evennode ${{ secrets.EVENNODE_REPO_URL }}
-        git config --global user.email "${{ easella@yahoo.com }}"
+        git config --global user.email "${{secrets.GIT_EMAIL }}"
         git config --global user.name "${{ secrets.GIT_NAME }}"
         git push evennode +master
